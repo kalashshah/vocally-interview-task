@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, View } from "react-native";
+import StatusBar from "./components/StatusBar";
+
+import { ThemeProvider, useThemeStyle } from "./store/ThemeContext";
+import { Theme } from "./types/theme";
+
+const ToggleButton = () => {
+  const { toggleTheme, styles } = useThemeStyle(stylesheet);
+  return (
+    <View style={styles.container}>
+      <Button title="Toggle Theme" onPress={toggleTheme} />
+    </View>
+  );
+};
+
+const stylesheet = (theme: Theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.backgroundColor,
+      justifyContent: "center",
+    },
+  });
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <View style={styles.container}>
+        <StatusBar />
+        <ToggleButton />
+      </View>
+    </ThemeProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
   },
 });
