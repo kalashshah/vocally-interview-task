@@ -1,14 +1,13 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 import { light, dark } from "../constants/theme";
-import { StyleProp, StyleSheet, useColorScheme } from "react-native";
+import { StyleProp, useColorScheme } from "react-native";
 import { Theme, ThemeMode } from "../types/theme";
 
 interface ThemeContextInterface {
   themeMode: ThemeMode;
   toggleTheme: () => void;
   themes: {
-    light: typeof light;
-    dark: typeof dark;
+    [key in ThemeMode]: Theme;
   };
 }
 
@@ -29,11 +28,9 @@ export const ThemeProvider = (props: ThemeContextProps) => {
   const [themeMode, setThemeMode] = useState<ThemeMode>(currentTheme);
 
   const toggleTheme = () => {
-    if (themeMode === "light") {
-      setThemeMode(ThemeMode.dark);
-    } else {
-      setThemeMode(ThemeMode.light);
-    }
+    setThemeMode((prevThemeMode) =>
+      prevThemeMode === ThemeMode.light ? ThemeMode.dark : ThemeMode.light
+    );
   };
 
   return (
