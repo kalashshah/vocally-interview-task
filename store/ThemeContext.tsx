@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { light, dark } from "../constants/theme";
 import { StyleProp, StyleSheet, useColorScheme } from "react-native";
 import { Theme, ThemeMode } from "../types/theme";
@@ -54,7 +54,7 @@ export const useThemeStyle = <T extends StyleProp<any>>(
 ) => {
   const { themeMode, themes, toggleTheme } = useContext(ThemeContext);
   const theme = themes[themeMode];
-  const styles = stylesheetBuilder(theme);
+  const styles = useMemo(() => stylesheetBuilder(theme), [themeMode]);
   return { themeMode, toggleTheme, styles };
 };
 
