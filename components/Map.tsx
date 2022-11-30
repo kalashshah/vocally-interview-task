@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
+import { MarkerData } from "../types/map";
 import { Theme } from "../types/theme";
 import CustomMarker from "./CustomMarker";
 import { mapData } from "../constants/mapData";
@@ -9,10 +10,14 @@ import { useThemeStyle } from "../store/ThemeContext";
 import { darkMapStyle } from "../constants/darkMapStyle";
 import { silverMapStyle } from "../constants/silverMapStyle";
 
-const Map = () => {
+interface Props {
+  selected: null | MarkerData;
+  setSelected: (marker: null | MarkerData) => void;
+}
+
+const Map = ({ selected, setSelected }: Props) => {
   const { themeMode, styles } = useThemeStyle(stylesheet);
   const mapStyle = themeMode === "light" ? silverMapStyle : darkMapStyle;
-  const [selectedIndex, setSelectedIndex] = React.useState<null | Number>(null);
 
   return (
     <View style={styles.container}>
@@ -30,12 +35,12 @@ const Map = () => {
           <Marker
             key={marker.id}
             coordinate={marker.coordinate}
-            onPress={() => setSelectedIndex(marker.id)}
-            onDeselect={() => setSelectedIndex(null)}
+            onPress={() => setSelected(marker)}
+            onDeselect={() => setSelected(null)}
           >
             <CustomMarker
               marker={marker}
-              isSelected={marker.id === selectedIndex}
+              isSelected={marker.id === selected?.id}
             />
           </Marker>
         ))}
