@@ -1,4 +1,5 @@
 import { StatusBar as StatusBarRN } from "expo-status-bar";
+
 import { useTheme } from "../store/ThemeContext";
 
 const StatusBar = () => {

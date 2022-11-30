@@ -1,7 +1,8 @@
-import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { MarkerData } from "../types/map";
+import { Image, StyleSheet, View } from "react-native";
+
 import { Theme } from "../types/theme";
+import { MarkerData } from "../types/map";
 import { useThemeStyle } from "../store/ThemeContext";
 
 interface Props {

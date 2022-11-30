@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { useThemeStyle } from "../store/ThemeContext";
+
+import { Theme } from "../types/theme";
 import { MarkerData } from "../types/map";
 import { mapData } from "../constants/mapData";
-import { Theme } from "../types/theme";
+import { useThemeStyle } from "../store/ThemeContext";
 
 interface Props {
   query: string;

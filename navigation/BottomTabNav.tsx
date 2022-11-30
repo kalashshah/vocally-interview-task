@@ -1,21 +1,21 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
 import {
   MaterialCommunityIcons,
   FontAwesome,
   Ionicons,
   Feather,
 } from "@expo/vector-icons";
+import { StyleSheet, View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Home from "../components/Home";
-import { Theme } from "../types/theme";
-import { useThemeStyle } from "../store/ThemeContext";
 import {
   Settings,
   Add,
   Profile,
   Notification,
 } from "../components/TempComponents";
+import Home from "../components/Home";
+import { Theme } from "../types/theme";
+import { useThemeStyle } from "../store/ThemeContext";
 
 const Tab = createBottomTabNavigator();
 

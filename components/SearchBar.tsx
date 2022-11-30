@@ -5,10 +5,11 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { Theme } from "../types/theme";
-import { useThemeStyle } from "../store/ThemeContext";
 import { Ionicons } from "@expo/vector-icons";
+
+import { Theme } from "../types/theme";
 import SearchResults from "./SearchResults";
+import { useThemeStyle } from "../store/ThemeContext";
 
 const SearchBar = () => {
   const { styles } = useThemeStyle(stylesheet);
@@ -49,11 +50,8 @@ export default SearchBar;
 const stylesheet = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      top: 0,
-      zIndex: 1,
-      position: "absolute",
-      alignSelf: "center",
       width: "90%",
+      alignSelf: "center",
     },
     searchBar: {
       height: 40,
