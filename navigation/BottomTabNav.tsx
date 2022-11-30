@@ -20,9 +20,7 @@ import { useThemeStyle } from "../store/ThemeContext";
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
-  const { themeMode, styles } = useThemeStyle(stylesheet);
-  const iconColor = themeMode === "dark" ? "#fff" : "#000";
-  const iconSize = 25;
+  const { styles } = useThemeStyle(stylesheet);
 
   return (
     <Tab.Navigator
@@ -40,8 +38,7 @@ const Tabs = () => {
           tabBarIcon: () => (
             <MaterialCommunityIcons
               name="compass-outline"
-              color={iconColor}
-              size={iconSize}
+              style={styles.icon}
             />
           ),
         }}
@@ -50,9 +47,7 @@ const Tabs = () => {
         name="Settings"
         component={Settings}
         options={{
-          tabBarIcon: () => (
-            <FontAwesome name="map" size={iconSize} color={iconColor} />
-          ),
+          tabBarIcon: () => <FontAwesome name="map" style={styles.icon} />,
         }}
       />
       <Tab.Screen
@@ -61,7 +56,7 @@ const Tabs = () => {
         options={{
           tabBarIcon: () => (
             <View style={styles.plusIconContainer}>
-              <Feather name="plus" size={iconSize} color={"white"} />
+              <Feather name="plus" style={[styles.icon, { color: "white" }]} />
             </View>
           ),
         }}
@@ -71,11 +66,7 @@ const Tabs = () => {
         component={Notification}
         options={{
           tabBarIcon: () => (
-            <Ionicons
-              name="notifications-outline"
-              size={iconSize}
-              color={iconColor}
-            />
+            <Ionicons name="notifications-outline" style={styles.icon} />
           ),
         }}
       />
@@ -83,9 +74,7 @@ const Tabs = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: () => (
-            <FontAwesome name="user-o" size={iconSize} color={iconColor} />
-          ),
+          tabBarIcon: () => <FontAwesome name="user-o" style={styles.icon} />,
         }}
       />
     </Tab.Navigator>
@@ -116,5 +105,9 @@ const stylesheet = (theme: Theme) =>
     tabBarStyle: {
       backgroundColor: theme.backgroundColor,
       borderTopWidth: 0,
+    },
+    icon: {
+      color: theme.textColor,
+      fontSize: 25,
     },
   });
