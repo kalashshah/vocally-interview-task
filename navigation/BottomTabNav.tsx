@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
 import {
   MaterialCommunityIcons,
   FontAwesome,
@@ -10,13 +10,18 @@ import {
 import Home from "../components/Home";
 import { Theme } from "../types/theme";
 import { useThemeStyle } from "../store/ThemeContext";
+import {
+  Settings,
+  Add,
+  Profile,
+  Notification,
+} from "../components/TempComponents";
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   const { themeMode, styles } = useThemeStyle(stylesheet);
   const iconColor = themeMode === "dark" ? "#fff" : "#000";
-  const themeColor = themeMode === "dark" ? "#000" : "#fff";
   const iconSize = 25;
 
   return (
@@ -26,6 +31,7 @@ const Tabs = () => {
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBarStyle,
       }}
+      initialRouteName="Home"
     >
       <Tab.Screen
         name="Home"
@@ -42,7 +48,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Settings"
-        component={Home}
+        component={Settings}
         options={{
           tabBarIcon: () => (
             <FontAwesome name="map" size={iconSize} color={iconColor} />
@@ -51,7 +57,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Add"
-        component={Home}
+        component={Add}
         options={{
           tabBarIcon: () => (
             <View style={styles.plusIconContainer}>
@@ -62,7 +68,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Notification"
-        component={Home}
+        component={Notification}
         options={{
           tabBarIcon: () => (
             <Ionicons
@@ -75,7 +81,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={Home}
+        component={Profile}
         options={{
           tabBarIcon: () => (
             <FontAwesome name="user-o" size={iconSize} color={iconColor} />
@@ -109,5 +115,6 @@ const stylesheet = (theme: Theme) =>
     },
     tabBarStyle: {
       backgroundColor: theme.backgroundColor,
+      borderTopWidth: 0,
     },
   });
